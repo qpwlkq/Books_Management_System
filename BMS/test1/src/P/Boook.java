@@ -1,15 +1,14 @@
 package P;
 
-import java.security.PrivateKey;
 
 public class Boook {
     private String ISBN;
     private String Bname;
-    private int Bpulish;
+    private int Bpublish;
     private String Bauthor;
     private String Bpress;
     private int Bnumber;
-    private char Kind;
+    private String Kind;
 
     public String getISBN() {
         return ISBN;
@@ -19,8 +18,8 @@ public class Boook {
         return Bname;
     }
 
-    public int getBpulish() {
-        return Bpulish;
+    public int getBpublish() {
+        return Bpublish;
     }
 
     public String getBauthor() {
@@ -35,7 +34,7 @@ public class Boook {
         return Bnumber;
     }
 
-    public char getKind() {
+    public String getKind() {
         return Kind;
     }
 
@@ -47,8 +46,8 @@ public class Boook {
         Bname = bname;
     }
 
-    public void setBpulish(int bpulish) {
-        Bpulish = bpulish;
+    public void setBpublish(int bpublish) {
+        Bpublish = bpublish;
     }
 
     public void setBauthor(String bauthor) {
@@ -63,7 +62,7 @@ public class Boook {
         Bnumber = bnumber;
     }
 
-    public void setKind(char kind) {
+    public void setKind(String kind) {
         Kind = kind;
     }
 }

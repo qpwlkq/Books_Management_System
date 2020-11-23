@@ -12,6 +12,8 @@ import java.lang.*;
 
 public class Conn {
 
+
+    /*
     public static void main(String[] args) throws ClassNotFoundException, SQLException  {
         String URL="jdbc:mysql://127.0.0.1:3306/book?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC";
         String USER="root";
@@ -42,6 +44,40 @@ public class Conn {
         rs.close();
         st.close();
         conn.close();
+    }*/
+
+
+
+    private static final String url = "jdbc:mysql://127.0.0.1:3306/book?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC";		//数据库地址
+    private static final String username = "root";		//数据库用户名
+    private static final String password = "072534";		//数据库密码
+    private static final String driver = "com.mysql.cj.jdbc.Driver";		//mysql驱动
+    private static final Connection conn = null;
+
+    /**
+     * 连接数据库
+     * @return
+     */
+    public static Connection conn() throws SQLException, ClassNotFoundException {
+        Class.forName(driver);  //加载数据库驱动
+        Connection conn = DriverManager.getConnection(url, username, password);  //连接数据库
+        return conn;
     }
+
+    /**
+     * 关闭数据库链接
+     * @return
+     */
+    public static void close() {
+        if(conn != null) {
+            try {
+                conn.close();  //关闭数据库链接
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
 }
 

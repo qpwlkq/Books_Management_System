@@ -1,6 +1,6 @@
 package P;
 
-
+// 主页! 主页! 主页! 主页! 主页!
 
 /*
 import java.awt.*;
@@ -21,8 +21,6 @@ public class Windows_Login extends JFrame{
     }
 }*/
 
-
-
 import java.awt.event.ActionEvent;
 import javax.swing.*;
 import java.awt.*;
@@ -31,7 +29,7 @@ import java.awt.event.ActionListener;
 public class Windows_Login{
     static JFrame frame;
     public Windows_Login(){
-        ImageIcon icon = new ImageIcon("C:/Users/DELL/Desktop/BMS/photo/1.jpg");
+        ImageIcon icon = new ImageIcon("C:/Users/DELL/Desktop/BMS/photo/3.jpg");
         JLabel label = new JLabel(icon);
         label.setBounds(0,0,icon.getIconWidth(),icon.getIconHeight());
 
@@ -110,7 +108,7 @@ public class Windows_Login{
         panel.add(jb3);
         panel.setOpaque(false);
 
-        frame.setSize(icon.getIconWidth(),icon.getIconHeight());
+        frame.setSize(icon.getIconWidth(), icon.getIconHeight());
         frame.setVisible(true);
         frame.add(panel);
 
