@@ -7,7 +7,7 @@ public class Add_Users extends JFrame{
     public Add_Users() {
         setTitle("添加用户");
         setSize(280, 240);
-        setLocationRelativeTo(Windows_Login.frame);
+        //setLocationRelativeTo(Windows_Login.frame);
         setVisible(true);
         setResizable(false);
         setLayout(null);

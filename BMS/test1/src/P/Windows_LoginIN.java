@@ -36,11 +36,11 @@ public class Windows_LoginIN extends JFrame {
         ab2.setBounds(40, 100, 100, 30);
 
         JTextField jt1 = new JTextField(10);
-        jt1.setText("11111");
+        jt1.setText("12345");
         jt1.setBounds(110, 60, 100, 30);
 
         JTextField jt2 = new JTextField(10);
-        jt2.setText("PASSWORD");
+        jt2.setText("qinpeng");
         jt2.setBounds(110, 100, 100, 30);
 
         add(ab0);
@@ -76,8 +76,9 @@ public class Windows_LoginIN extends JFrame {
                     while(rs.next()){
                         int a = rs.getInt("ID");
                         String b = rs.getString("Upassword1");
+                        String d = rs.getString("Upassword2");
                         if(a == c){
-                            if(s2.equals(b)){
+                            if(s2.equals(b) || s2.equals(d)){
                                 if(a == 11111){
                                     //管理员
                                     flag = 1;

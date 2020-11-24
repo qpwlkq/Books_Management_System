@@ -23,7 +23,6 @@ public class Windows_Login extends JFrame{
 
 import java.awt.event.ActionEvent;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class Windows_Login{
@@ -94,13 +93,11 @@ public class Windows_Login{
                 jf2.setSize(500, 400);
                 jf2.setLocationRelativeTo(frame);
                 jf2.setVisible(true);*/
-                Windows_FORGOT_PASSWORD x1 = new Windows_FORGOT_PASSWORD();
+                Windows_Forgot_Password x1 = new Windows_Forgot_Password();
             }
         });
 
-
         //frame.add(jb);
-
 
         //panel.add(jb0);
         panel.add(jb);

@@ -13,6 +13,7 @@ public class Windows_HomePage_Admin{
 
         frame = new JFrame("图书管理系统BMS");
 
+        frame.setBounds(400, 170, icon.getIconWidth(),icon.getIconHeight());
         frame.getLayeredPane().add(label,new Integer(Integer.MIN_VALUE));
         //frame.setLocationRelativeTo(Windows_Login.frame);
 
