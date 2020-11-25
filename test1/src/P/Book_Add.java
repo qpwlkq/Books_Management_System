@@ -56,7 +56,16 @@ public class Book_Add {
 
             ps.executeUpdate();			//执行sql语句
 
-            System.out.println("插入成功(*￣︶￣)");
+            System.out.println("插入成功");
+
+            String sql2 = "INSERT INTO everybook (ISBN, Bname, Bnumber) VALUES(?,?,?)";
+            ps = conn.prepareStatement(sql2);
+            ps.setString(1, stu.getISBN());
+            ps.setString(2, stu.getBname());
+            ps.setInt(3,stu.getBnumber());
+
+            ps.executeUpdate();
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

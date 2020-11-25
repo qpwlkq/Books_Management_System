@@ -36,11 +36,11 @@ public class Windows_LoginIN extends JFrame {
         ab2.setBounds(40, 100, 100, 30);
 
         JTextField jt1 = new JTextField(10);
-        jt1.setText("12345");
+        jt1.setText("11111");
         jt1.setBounds(110, 60, 100, 30);
 
         JTextField jt2 = new JTextField(10);
-        jt2.setText("qinpeng");
+        jt2.setText("4636");
         jt2.setBounds(110, 100, 100, 30);
 
         add(ab0);

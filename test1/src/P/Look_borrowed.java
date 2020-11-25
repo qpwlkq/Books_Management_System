@@ -6,13 +6,13 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.*;
-import java.text.*;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
-public class Borrow_my extends JFrame {
-    public Borrow_my(int ID) {
-        setTitle("借阅记录");
-        setSize(500, 400);
+public class Look_borrowed extends JFrame {
+    public Look_borrowed() {
+        setTitle("所有借阅");
+        setSize(600, 500);
         setLocationRelativeTo(Windows_Login.frame);
         setVisible(true);
         setResizable(false);
@@ -20,15 +20,16 @@ public class Borrow_my extends JFrame {
         //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         try {
-            Connection conn4 = Conn.conn();
-            Statement stmt = conn4.createStatement();
-            String sqlx = "select * from borrowing";
-            ResultSet rs = stmt.executeQuery(sqlx);
+            Connection conn5 = Conn.conn();
+            Statement stmt = conn5.createStatement();
+            String sql = "select * from borrowed";
+            ResultSet rs = stmt.executeQuery(sql);
 
             Object[][] rowData = new Object[8200][4];
 
             int cnt = 0;
             int flag = 0;
+
             SimpleDateFormat sdf = new SimpleDateFormat("", Locale.SIMPLIFIED_CHINESE);
             sdf.applyPattern("yyyy年MM月dd日");
 
@@ -36,11 +37,10 @@ public class Borrow_my extends JFrame {
             while (rs.next()) {
                 int id = rs.getInt("ID");
                 System.out.println(id);
-                if(ID != id)
-                    continue;
                 String isbn = rs.getString("ISBN");
-                long btime = rs.getLong("BTime");
+                long btime = rs.getLong("Bdate");
                 int bid = rs.getInt("BID");
+
                 rowData[cnt][0] = id;
                 rowData[cnt][1] = isbn;
                 rowData[cnt][2] = bid;
@@ -52,8 +52,6 @@ public class Borrow_my extends JFrame {
             JPanel panel = new JPanel();
 
             String[] columnNames = {"ID", "ISBN", "图书编号", "归还日期"};
-
-            //所有行数据
 
             JTable table = new JTable(rowData, columnNames);
 
@@ -74,9 +72,9 @@ public class Borrow_my extends JFrame {
 
         }
     }
-    public Borrow_my() {
-        setTitle("所有借阅");
-        setSize(700, 500);
+    public Look_borrowed(int ID) {
+        setTitle("我的历史借阅");
+        setSize(600, 500);
         setLocationRelativeTo(Windows_Login.frame);
         setVisible(true);
         setResizable(false);
@@ -86,7 +84,7 @@ public class Borrow_my extends JFrame {
         try {
             Connection conn5 = Conn.conn();
             Statement stmt = conn5.createStatement();
-            String sql = "select * from borrowing";
+            String sql = "select * from borrowed";
             ResultSet rs = stmt.executeQuery(sql);
 
             Object[][] rowData = new Object[8200][4];
@@ -100,9 +98,11 @@ public class Borrow_my extends JFrame {
             //System.out.println(c + c);
             while (rs.next()) {
                 int id = rs.getInt("ID");
-                System.out.println(id);
+                //System.out.println(id);
+                if(id != ID)
+                    continue;
                 String isbn = rs.getString("ISBN");
-                long btime = rs.getLong("BTime");
+                long btime = rs.getLong("Bdate");
                 int bid = rs.getInt("BID");
 
                 rowData[cnt][0] = id;

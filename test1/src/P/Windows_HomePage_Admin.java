@@ -28,13 +28,15 @@ public class Windows_HomePage_Admin{
 
 
         JButton jb = new JButton("更改密码");
-        JButton jb2 = new JButton("查看所有图书");
+        JButton jb2 = new JButton("查看每种图书");
         JButton jb3 = new JButton("删除用户");
         JButton jb4 = new JButton("查看所有用户");
         JButton jb5 = new JButton("添加图书");
         JButton jb6 = new JButton("添加用户");
-        JButton jb7 = new JButton("查看所有借书情况");
+        JButton jb7 = new JButton("当前借阅记录");
+        JButton jb9 = new JButton("查看每本图书");
         JButton jb8 = new JButton("退出系统");
+        JButton jb10 = new JButton("历史借阅记录");
         JFrame jf2 = new JFrame();
 
         jb.addActionListener(new ActionListener() {
@@ -101,7 +103,18 @@ public class Windows_HomePage_Admin{
                 frame.dispose();
             }
         });
-
+        jb9.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Look_every_book x1 = new Look_every_book();
+            }
+        });
+        jb10.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Look_borrowed x1 = new Look_borrowed();
+            }
+        });
 
         //frame.add(jb);
 
@@ -109,11 +122,13 @@ public class Windows_HomePage_Admin{
         //panel.add(jb0);
         panel.add(jb);
         panel.add(jb2);
+        panel.add(jb9);
         panel.add(jb4);
         panel.add(jb5);
         panel.add(jb3);
-        panel.add(jb6);
+        //panel.add(jb6);
         panel.add(jb7);
+        panel.add(jb10);
         panel.add(jb8);
         panel.setOpaque(false);
 

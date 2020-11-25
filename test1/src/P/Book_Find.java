@@ -60,15 +60,16 @@ public class Book_Find extends JFrame {
                 try{
                     Connection conn = Conn.conn();
                     Statement stmt = conn.createStatement();
-                    String sql = "select * from book";
+                    String sql = "select * from everybook left join book on book.ISBN = everybook.ISBN"; //连接!
                     ResultSet rs = stmt.executeQuery(sql);
 
-                    Object[][] rowData = new Object[2000][7];
+                    Object[][] rowData = new Object[8000][9];
 
                     int cnt = 0;
                     int flag = 0;
-                    //System.out.println(c + c);
+                    System.out.println(c + c);
                     while(rs.next()){
+                        //System.out.println("123");
                         String ISBN = rs.getString("ISBN");
                         String Bname = rs.getString("Bname");
                         int Bpublish = rs.getInt("Bpublish");
@@ -76,6 +77,9 @@ public class Book_Find extends JFrame {
                         String Bpress = rs.getString("Bpress");
                         int Bnumber = rs.getInt("Bnumber");
                         String Kind = rs.getString("Kind");
+                        int BID = rs.getInt("BID");
+                        int ZT = rs.getInt("ZT");
+                        //System.out.println(ZT);
                         if(ISBN.equals(c)){
                             flag = 1;
                             rowData[cnt][0] = ISBN;
@@ -85,6 +89,11 @@ public class Book_Find extends JFrame {
                             rowData[cnt][4] = Bpress;
                             rowData[cnt][5] = Bnumber;
                             rowData[cnt][6] = Kind;
+                            rowData[cnt][7] = BID;
+                            if(ZT == 1)
+                                rowData[cnt][8] = "未借出";
+                            else
+                                rowData[cnt][8] = "已借出";
                             cnt++;
                             //vector.add(b);
                         }
@@ -99,43 +108,37 @@ public class Book_Find extends JFrame {
                             rowData[cnt][4] = Bpress;
                             rowData[cnt][5] = Bnumber;
                             rowData[cnt][6] = Kind;
+                            rowData[cnt][7] = BID;
+                            if(ZT == 1)
+                                rowData[cnt][8] = "未借出";
+                            else
+                                rowData[cnt][8] = "已借出";
                             cnt++;
-                            //System.out.println("1");
+                            //System.out.println("+1");
                         }
                     }
 
                     if(flag == 0){
-
-                        JLabel jb0 = new JLabel("  图书不存在!");
-                        jb0.setForeground(Color.red);
-                        jb0.setFont(new Font("微软雅黑", Font.BOLD, 18));
-                        JFrame aa1 = new JFrame();
-                        aa1.add(jb0);
-                        aa1.setVisible(true);
-                        aa1.setResizable(false);
-                        aa1.setSize( 200, 150);
-                        aa1.setLocationRelativeTo(Windows_Login.frame);
-
-                        System.out.println("图书不存在");
+                        Little_Notice.puts("图书不存在!");
                     }
                     else {
                         JFrame frame = new JFrame();
                         frame.setVisible(true);
-                        frame.setSize(700,600);
+                        frame.setSize(800,600);
                         //frame.setLocationRelativeTo(Windows_Login.frame);
 
                         JPanel panel = new JPanel();
 
                         //表头
-                        String[] columnNames = {"ISBN", "书名", "出版日期", "作者", "出版社", "数量", "种类"};
+                        String[] columnNames = {"ISBN", "书名", "出版日期", "作者", "出版社", "数量", "种类", "图书编号", "是否借出(0/1)"};
 
                         //所有行数据
 
                         JTable table = new JTable(rowData, columnNames);
 
                         table.setRowHeight(40);
-                        table.getColumnModel().getColumn(0).setPreferredWidth(60);
-                        table.setPreferredScrollableViewportSize(new Dimension(600, 500));
+                        table.getColumnModel().getColumn(0).setPreferredWidth(80);
+                        table.setPreferredScrollableViewportSize(new Dimension(700, 500));
 
                         JScrollPane scrollPane = new JScrollPane(table);
 

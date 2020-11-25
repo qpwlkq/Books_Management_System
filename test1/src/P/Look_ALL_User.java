@@ -9,7 +9,7 @@ import java.sql.Statement;
 
 public class Look_ALL_User extends JFrame {
     public Look_ALL_User() {
-        setTitle("查看所有图书");
+        setTitle("所有种类图书总览");
         setSize(750, 600);
         setLocationRelativeTo(Windows_Login.frame);
         setVisible(true);

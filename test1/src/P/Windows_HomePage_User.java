@@ -32,6 +32,7 @@ public class Windows_HomePage_User{
         JButton jb5 = new JButton("退出系统");
         JButton jb6 = new JButton("查看所有图书");
         JButton jb7 = new JButton("我的借阅");
+        JButton jb8 = new JButton("我的历史借阅");
 
         JFrame jf2 = new JFrame();
 
@@ -95,12 +96,19 @@ public class Windows_HomePage_User{
                 Borrow_my x1 = new Borrow_my(ID);
             }
         });
+        jb8.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Look_borrowed x1 = new Look_borrowed(ID);
+            }
+        });
 
         //frame.add(jb);
         //panel.add(jb0);
         panel.add(jb);
         panel.add(jb2);
         panel.add(jb6);
+        panel.add(jb8);
         panel.add(jb3);
         panel.add(jb4);
         panel.add(jb7);
