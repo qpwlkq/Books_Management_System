@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80020
 File Encoding         : 65001
 
-Date: 2020-11-29 18:38:05
+Date: 2020-11-30 22:04:57
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -27,7 +27,8 @@ CREATE TABLE `book` (
   `Bpress` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `Bnumber` int NOT NULL,
   `Kind` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  PRIMARY KEY (`ISBN`)
+  PRIMARY KEY (`ISBN`),
+  KEY `isbn` (`ISBN`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -1995,7 +1996,8 @@ CREATE TABLE `borrowed` (
   `BID` int NOT NULL,
   `ID` int NOT NULL,
   `ISBN` varchar(255) NOT NULL,
-  PRIMARY KEY (`ID`,`BID`)
+  PRIMARY KEY (`ID`,`BID`),
+  KEY `isbn` (`ISBN`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -2015,6 +2017,7 @@ CREATE TABLE `borrowing` (
   `ID` int NOT NULL,
   `BTime` bigint NOT NULL,
   PRIMARY KEY (`ID`,`BID`),
+  KEY `isbn` (`ISBN`),
   CONSTRAINT `borrowing_chk_1` CHECK (((`ID` > 10000) and (`ID` < 99999)))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -2032,7 +2035,8 @@ CREATE TABLE `everybook` (
   `Bnumber` int NOT NULL,
   `BID` int NOT NULL AUTO_INCREMENT,
   `ZT` int NOT NULL DEFAULT '1',
-  PRIMARY KEY (`BID`)
+  PRIMARY KEY (`BID`),
+  KEY `isbn` (`ISBN`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4887 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -6939,6 +6943,7 @@ CREATE TABLE `users` (
   `Uphone` varchar(255) NOT NULL,
   `Upassword2` varchar(255) NOT NULL,
   PRIMARY KEY (`ID`),
+  KEY `id` (`ID`) USING BTREE,
   CONSTRAINT `users_chk_1` CHECK (((`ID` > 10000) and (`ID` < 99999))),
   CONSTRAINT `users_chk_2` CHECK (((`Uage` > 0) and (`Uage` < 120)))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -6949,3 +6954,86 @@ CREATE TABLE `users` (
 INSERT INTO `users` VALUES ('11111', '4636', 'Admin', '100', null, null, '15194150732', '4636');
 INSERT INTO `users` VALUES ('12345', '123456', '秦鹏', '18', '男', 'CS', '15194150732', '123456');
 INSERT INTO `users` VALUES ('44444', '44444', '44444', '1', '男', 'CS', '44444', '44444');
+
+-- ----------------------------
+-- View structure for `every_l4`
+-- ----------------------------
+DROP VIEW IF EXISTS `every_l4`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `every_l4` AS select `everybook`.`ISBN` AS `ISBN`,`everybook`.`Bname` AS `Bname`,`everybook`.`Bnumber` AS `Bnumber`,`everybook`.`BID` AS `BID`,`everybook`.`ZT` AS `ZT` from `everybook` ;
+
+-- ----------------------------
+-- View structure for `l1`
+-- ----------------------------
+DROP VIEW IF EXISTS `l1`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `l1` AS select `borrowed`.`Bdate` AS `Bdate`,`borrowed`.`BID` AS `BID`,`borrowed`.`ID` AS `ID`,`borrowed`.`ISBN` AS `ISBN` from `borrowed` ;
+
+-- ----------------------------
+-- View structure for `l2`
+-- ----------------------------
+DROP VIEW IF EXISTS `l2`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `l2` AS select `book`.`ISBN` AS `ISBN`,`book`.`Bname` AS `Bname`,`book`.`Bpublish` AS `Bpublish`,`book`.`Bauthor` AS `Bauthor`,`book`.`Bpress` AS `Bpress`,`book`.`Bnumber` AS `Bnumber`,`book`.`Kind` AS `Kind` from `book` ;
+
+-- ----------------------------
+-- View structure for `l3`
+-- ----------------------------
+DROP VIEW IF EXISTS `l3`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `l3` AS select `borrowing`.`BID` AS `BID`,`borrowing`.`ISBN` AS `ISBN`,`borrowing`.`ID` AS `ID`,`borrowing`.`BTime` AS `BTime` from `borrowing` ;
+
+-- ----------------------------
+-- View structure for `user_l5`
+-- ----------------------------
+DROP VIEW IF EXISTS `user_l5`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `user_l5` AS select `users`.`ID` AS `ID`,`users`.`Uname` AS `Uname`,`users`.`Uage` AS `Uage`,`users`.`Usex` AS `Usex`,`users`.`Umarjor` AS `Umarjor`,`users`.`Uphone` AS `Uphone` from `users` ;
+
+-- ----------------------------
+-- Procedure structure for `all_book`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `all_book`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `all_book`()
+BEGIN
+	#Routine body goes here...
+	SELECT * FROM book;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Procedure structure for `all_users`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `all_users`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `all_users`()
+BEGIN
+	#Routine body goes here...
+	select * from users;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Function structure for `find_password`
+-- ----------------------------
+DROP FUNCTION IF EXISTS `find_password`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `find_password`(`lhr` int) RETURNS varchar(255) CHARSET utf8
+BEGIN
+
+	RETURN (SELECT Upassword1 FROM users WHERE users.ID=lhr);
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Function structure for `find_ps_Admin`
+-- ----------------------------
+DROP FUNCTION IF EXISTS `find_ps_Admin`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `find_ps_Admin`() RETURNS varchar(255) CHARSET utf8
+BEGIN
+	#Routine body goes here...
+
+	RETURN (SELECT Upassword1 from users where users.ID=11111);
+END
+;;
+DELIMITER ;
