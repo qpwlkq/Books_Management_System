@@ -54,10 +54,13 @@ public class Book_Return extends JFrame {
                     String str = jx1.getText();
                     int bid = Integer.parseInt(jx2.getText());
 
+
                     Connection conn = Conn.conn();
                     Statement stmt = conn.createStatement();
                     String sql = "select * from everybook";
                     ResultSet rs = stmt.executeQuery(sql);
+
+
 
                     while(rs.next()){
                         if(bid == rs.getInt("BID")) {

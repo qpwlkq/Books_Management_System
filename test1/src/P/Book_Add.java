@@ -19,10 +19,6 @@ public class Book_Add {
     private static ResultSet rs = null;
     private static final CallableStatement cs = null;
 
-    /**
-     * Insert方法封装
-     * @param stu 传入参数
-     */
     public static void Insert(Boook stu) throws SQLException, ClassNotFoundException {
 
         conn = Conn.conn();		//调用 DBconnection 类的 conn() 方法连接数据库
@@ -30,13 +26,6 @@ public class Book_Add {
         String sql = "INSERT INTO Book (ISBN, Bname, Bpublish, Bauthor, Bpress, Bnumber, Kind) VALUES(?,?,?,?,?,?,?)";		//插入sql语句
         try {
             ps = conn.prepareStatement(sql);
-
-            /**
-             * 调用实体StuInfo类,获取需要插入的各个字段的值
-             * 注意参数占位的位置
-             * 通过set方法设置参数的位置
-             * 通过get方法取参数的值
-             */
             /*
             ISBN string;
             Bname string;

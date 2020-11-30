@@ -5,10 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class Windows_Forgot_Password extends JFrame {
 
@@ -62,10 +59,12 @@ public class Windows_Forgot_Password extends JFrame {
                 String Uname = tx2.getText();
                 String Uphone = tx3.getText();
                 try{
+
                     Connection conn = Conn.conn();
                     Statement stmt = conn.createStatement();
                     String sql = "select * from users";
                     ResultSet rs = stmt.executeQuery(sql);
+
 
                     while(rs.next()){
                         int id = rs.getInt("ID");

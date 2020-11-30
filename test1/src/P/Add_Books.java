@@ -15,7 +15,12 @@ public class Add_Books extends JFrame {
     private int ID, Uage;
     private String Upassword1, Uname, Usex, Umarjor, Uphone, Upassword2;
     int cout;
-    public Add_Books(){
+    public Add_Books(int id){
+        if(id != 11111){
+            Little_Notice.puts("您不是管理员, 严重警告!");
+            return ;
+        }
+
         setLocationRelativeTo(Windows_Login.frame);
         setTitle("添加图书");
         setSize(500, 580);

@@ -76,7 +76,7 @@ public class Windows_HomePage_Admin{
             public void actionPerformed(ActionEvent e) {
                 // 进行逻辑处理即可
                 System.out.println("触发了5号事件: 添加图书");
-                Add_Books x1 = new Add_Books();
+                Add_Books x1 = new Add_Books(ID);
             }
         });
         jb6.addActionListener(new ActionListener() {

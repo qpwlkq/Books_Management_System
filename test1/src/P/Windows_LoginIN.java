@@ -8,10 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.print.Book;
 import java.nio.channels.ClosedSelectorException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class Windows_LoginIN extends JFrame {
@@ -66,10 +63,15 @@ public class Windows_LoginIN extends JFrame {
                 System.out.println(s2);
 
                 try{
+                    /*
                     Connection conn = Conn.conn();
                     Statement stmt = conn.createStatement();
                     String sql = "select * from users";
                     ResultSet rs = stmt.executeQuery(sql);
+                     */
+                    Connection conn = Conn.conn();
+                    CallableStatement cs = conn.prepareCall("{call all_users()}");
+                    ResultSet rs = cs.executeQuery();
 
                     int flag = 0;
 
@@ -112,7 +114,7 @@ public class Windows_LoginIN extends JFrame {
                     }
 
                     rs.close();
-                    stmt.close();
+                    //stmt.close();
                     conn.close();
                 }catch(SQLException x){
 

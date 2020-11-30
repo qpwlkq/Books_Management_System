@@ -2,10 +2,7 @@ package P;
 
 import javax.swing.*;
 import java.awt.*;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class Look_ALL_User extends JFrame {
     public Look_ALL_User() {
@@ -19,10 +16,17 @@ public class Look_ALL_User extends JFrame {
 
 
         try {
+            /*
             Connection conn = Conn.conn();
             Statement stmt = conn.createStatement();
             String sql = "select * from book";
             ResultSet rs = stmt.executeQuery(sql);
+
+             */
+            Connection conn = Conn.conn();
+            CallableStatement cs = conn.prepareCall("{call all_book()}");
+            ResultSet rs = cs.executeQuery();
+            System.out.println("all_books");
 
             Object[][] rowData = new Object[2200][7];
 

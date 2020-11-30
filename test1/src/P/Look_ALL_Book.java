@@ -21,7 +21,7 @@ public class Look_ALL_Book extends JFrame {
         try {
             Connection conn = Conn.conn();
             Statement stmt = conn.createStatement();
-            String sql = "select * from users";
+            String sql = "select * from user_l5";
             ResultSet rs = stmt.executeQuery(sql);
 
             Object[][] rowData = new Object[2200][6];
@@ -31,13 +31,11 @@ public class Look_ALL_Book extends JFrame {
             //System.out.println(c + c);
             while (rs.next()) {
                 int id = rs.getInt("ID");
-                //String Upassword1 = rs.getString("Upassword1");
                 String Uname = rs.getString("Uname");
                 int Uage = rs.getInt("Uage");
                 String Usex = rs.getString("Usex");
                 String Umarjor = rs.getString("Umarjor");
                 String Uphone = rs.getString("Uphone");
-                //String Upassword2 = rs.getString("Upassword2");
                 rowData[cnt][0] = id;
                 rowData[cnt][1] = Uname;
                 rowData[cnt][2] = Uage;
